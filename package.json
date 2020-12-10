@@ -4,11 +4,14 @@
   "description": "Automatically record videos of your Cypress tests to BugReplay with timesynced network and JS console logs",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "prepare": "npm build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "BugReplay Inc",
   "license": "SEE LICENSE IN LICENSE file",
   "dependencies": {
-    "bugreplay-automation": "file:../bugreplay-automation"
+    "bugreplay-automation": "^1.0.0"
   }
 }
