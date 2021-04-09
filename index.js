@@ -41,7 +41,7 @@ function setupBugReplayPlugin(on, config) {
     on('before:browser:launch', function (browser, launchOptions) {
         // supply the absolute path to an unpacked extension's folder
         // NOTE: extensions cannot be loaded in headless Chrome
-        launchOptions.extensions.push('./node_modules/cypress-bugreplay/node_modules/bugreplay-automation/extension/');
+        launchOptions.extensions.push('./node_modules/bugreplay-automation/extension/');
         launchOptions.args.push('--auto-select-desktop-capture-source=cypress-example');
         return launchOptions;
     });
@@ -62,27 +62,29 @@ function setupBugReplaySupport(apiKey) {
             }
         });
     }); });
-    Cypress.on('test:after:run', function (test, instance) { return __awaiter(_this, void 0, void 0, function () {
-        var time, hierarchy;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    time = (new Date()).toISOString();
-                    hierarchy = test.invocationDetails.relativeFile.replace("cypress/", "").replace("/", " > ") + " > " + test.title;
-                    return [4 /*yield*/, bugreplay_automation_1.stopRecording()];
-                case 1:
-                    _a.sent();
-                    return [4 /*yield*/, bugreplay_automation_1.saveRecording("Cypress - " + test.invocationDetails.relativeFile + " - " + test.title + " - " + time, {
-                            test_hierarchy: hierarchy,
-                            test_passed: test.state === "passed",
-                            test_run_id: testRunId,
-                        })];
-                case 2:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); });
+    Cypress.on('test:after:run', function (test, instance) {
+        return (function () { return __awaiter(_this, void 0, void 0, function () {
+            var time, hierarchy;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        time = (new Date()).toISOString();
+                        hierarchy = test.invocationDetails.relativeFile.replace("cypress/", "").replace("/", " > ") + " > " + test.title;
+                        return [4 /*yield*/, bugreplay_automation_1.stopRecording()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, bugreplay_automation_1.saveRecording("Cypress - " + test.invocationDetails.relativeFile + " - " + test.title + " - " + time, {
+                                test_hierarchy: hierarchy,
+                                test_passed: test.state === "passed",
+                                test_run_id: testRunId,
+                            })];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+    });
 }
 exports.default = { setupBugReplaySupport: setupBugReplaySupport, setupBugReplayPlugin: setupBugReplayPlugin };
 module.exports = { setupBugReplaySupport: setupBugReplaySupport, setupBugReplayPlugin: setupBugReplayPlugin };

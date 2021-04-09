@@ -1,17 +1,20 @@
 {
   "name": "cypress-bugreplay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automatically record videos of your Cypress tests to BugReplay with timesynced network and JS console logs",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "prepare": "npm build",
+    "prepare": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "BugReplay Inc",
   "license": "SEE LICENSE IN LICENSE file",
   "dependencies": {
-    "bugreplay-automation": "^1.0.0"
+    "bugreplay-automation": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.37"
   }
 }

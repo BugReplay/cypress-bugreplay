@@ -6,7 +6,7 @@ function setupBugReplayPlugin(on: any, config:any) {
   on('before:browser:launch', (browser:any, launchOptions:any) => {
     // supply the absolute path to an unpacked extension's folder
     // NOTE: extensions cannot be loaded in headless Chrome
-    launchOptions.extensions.push('./node_modules/cypress-bugreplay/node_modules/bugreplay-automation/extension/')
+    launchOptions.extensions.push('./node_modules/bugreplay-automation/extension/')
     launchOptions.args.push('--auto-select-desktop-capture-source=cypress-example')
 
     return launchOptions
@@ -20,14 +20,16 @@ function setupBugReplaySupport(apiKey:string) {
     await startRecording()
   })
 
-  Cypress.on('test:after:run', async (test:any, instance:any) => {
-    const time = (new Date()).toISOString() 
-    const hierarchy = test.invocationDetails.relativeFile.replace("cypress/","").replace("/", " > ") + " > " + test.title
-    await stopRecording()
-    await saveRecording(`Cypress - ${test.invocationDetails.relativeFile} - ${test.title} - ${time}`, {
-      test_hierarchy: hierarchy,
-      test_passed: test.state === "passed",
-      test_run_id: testRunId,
+  Cypress.on('test:after:run', (test:any, instance:any) => {
+    return (async () => {
+      const time = (new Date()).toISOString() 
+      const hierarchy = test.invocationDetails.relativeFile.replace("cypress/","").replace("/", " > ") + " > " + test.title
+      await stopRecording()
+      await saveRecording(`Cypress - ${test.invocationDetails.relativeFile} - ${test.title} - ${time}`, {
+        test_hierarchy: hierarchy,
+        test_passed: test.state === "passed",
+        test_run_id: testRunId,
+      })
     })
   })
 }
