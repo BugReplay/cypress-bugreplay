@@ -35,7 +35,24 @@ import { setupBugReplaySupport } from 'cypress-bugreplay'
 setupBugReplaySupport("YOUR_API_KEY_GOES_HERE")
 ```
 
+
 After this configuration your tests will automatically be recorded to video, uploaded to BugReplay, and ready for playback alongside the timesynced JS console and network traffic logs.
+### Note
+You may be presented with a window, to select a screen to capture, during your test run, something like this:
+![screen-capture](./docs/assets/select-screen-capture.png)
+
+If you see the above screen during your test run, please check the file:
+`node_modules/cypress-bugreplay/index.js` and check the option: `launchOptions.args.push('--auto-select-desktop-capture-source=Entire screen');`
+
+Here are few options you can try:
+  - In case you have an extended display connected, you can choose   
+    "Screen 1" or "Screen 2" depending on where your cypress test runner is running:
+    `launchOptions.args.push('--auto-select-desktop-capture-source=Screen 1'); //or Screen 2` 
+
+  - You can also provide the title of the browser window which cypress launches while executing your tests.
+  `launchOptions.args.push('--auto-select-desktop-capture-source=cypress-bugreplay-example'); // Its the same as the name of your cypress test project`   
+
+
 
 
 ## Running the Test

@@ -7,7 +7,7 @@ function setupBugReplayPlugin(on: any, config:any) {
     // supply the absolute path to an unpacked extension's folder
     // NOTE: extensions cannot be loaded in headless Chrome
     launchOptions.extensions.push('./node_modules/bugreplay-automation/extension/')
-    launchOptions.args.push('--auto-select-desktop-capture-source=cypress-example')
+    launchOptions.args.push('--auto-select-desktop-capture-source=Entire screen')
 
     return launchOptions
   })
