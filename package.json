@@ -1,6 +1,6 @@
 {
   "name": "cypress-bugreplay",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Automatically record videos of your Cypress tests to BugReplay with timesynced network and JS console logs",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "author": "BugReplay Inc",
   "license": "SEE LICENSE IN LICENSE file",
   "dependencies": {
-    "bugreplay-automation": "^1.0.5"
+    "bugreplay-automation": "^1.0.6"
   },
   "devDependencies": {
     "@types/node": "^15.3.0"
